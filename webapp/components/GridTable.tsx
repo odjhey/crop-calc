@@ -13,7 +13,7 @@ function GridTable(props) {
   } = useTable({ columns, data }, useSortBy);
 
   return (
-    <table {...getTableProps()} style={{ border: "solid 1px blue" }}>
+    <table {...getTableProps()} className="table-fixed">
       <thead>
         {headerGroups.map((headerGroup) => (
           <tr {...headerGroup.getHeaderGroupProps()}>
@@ -36,6 +36,9 @@ function GridTable(props) {
           return (
             <tr {...row.getRowProps()}>
               {row.cells.map((cell) => {
+                const isRight = ["qty", "unitPrice", "totalPrice"].includes(
+                  cell.column.id,
+                );
                 return (
                   <td
                     {...cell.getCellProps()}
@@ -44,6 +47,7 @@ function GridTable(props) {
                       border: "solid 1px gray",
                       background: "papayawhip",
                     }}
+                    className={isRight ? `text-right` : ``}
                   >
                     {cell.render("Cell")}
                   </td>
