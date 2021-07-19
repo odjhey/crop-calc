@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button, FormControl, FormLabel, Input, Select } from "@vechaiui/react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-function StyledFormControl(props) {
+function StyledFormControl(props: { className: any; children: any }) {
   return <FormControl className={`py-1 px-1 ${props.className}`}>
     {props.children}
   </FormControl>;
@@ -15,12 +15,12 @@ interface IFormInput {
   curr: string;
 }
 
-export default function ExpenseForm(props) {
+export default function ExpenseForm(props: { onSubmit: any }) {
   const { register, handleSubmit, formState: { errors } } = useForm<
     IFormInput
   >();
 
-  const onSubmit = (data) => {
+  const onSubmit = (data: IFormInput) => {
     props.onSubmit(data);
   };
 
@@ -32,7 +32,7 @@ export default function ExpenseForm(props) {
             Description
           </FormLabel>
           <Input
-            invalid={errors.description ? true : false}
+            invalid={errors.description && "true"}
             id="description"
             type="text"
             {...register("description", { required: true, maxLength: 20 })}
@@ -43,7 +43,7 @@ export default function ExpenseForm(props) {
             Qty
           </FormLabel>
           <Input
-            invalid={errors.qty ? true : false}
+            invalid={errors.qty && "true"}
             id="qty"
             type="number"
             {...register("qty", { required: true, min: 0, max: 9999 })}
@@ -54,7 +54,7 @@ export default function ExpenseForm(props) {
             Unit Price
           </FormLabel>
           <Input
-            invalid={errors.price ? true : false}
+            invalid={errors.price && "true"}
             id="unit-price"
             type="number"
             {...register("price", { required: true, min: 0, max: 99999 })}
