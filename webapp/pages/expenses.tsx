@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { addExpense, computeCrop, createCrop, createExpense } from "xcrop";
 import ExpenseForm from "../components/ExpenseForm.tsx";
-import ExpenseRow from "../components/ExpenseRow.tsx";
 import GridTable from "../components/GridTable.tsx";
 import { expensesColumns } from "../components/ExpensesVO.ts";
 
