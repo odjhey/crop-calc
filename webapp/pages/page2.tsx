@@ -3,7 +3,7 @@ import { addExpense, computeCrop, createCrop, createExpense } from "xcrop";
 import ExpenseForm from "../components/ExpenseForm.tsx";
 import ExpenseRow from "../components/ExpenseRow.tsx";
 
-import { VechaiProvider } from "@vechaiui/react";
+import Theme from "../components/Theme.tsx";
 
 export default function Page2() {
   const [state, setState] = useState({ expenses: [] });
@@ -30,7 +30,7 @@ export default function Page2() {
     });
   }, [state.expenses]);
   return (
-    <VechaiProvider>
+    <Theme>
       <h1>Hey</h1>
       <ExpenseForm
         onSubmit={onSubmit}
@@ -59,6 +59,6 @@ export default function Page2() {
           {JSON.stringify(computeCrop(crop), null, 2)}
         </pre>
       </div>
-    </VechaiProvider>
+    </Theme>
   );
 }
