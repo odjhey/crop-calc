@@ -40,17 +40,53 @@ const light: ColorScheme = {
   },
 };
 
+const bee: ColorScheme = {
+  id: "bee",
+  type: "light",
+  colors: {
+    bg: {
+      base: colors.warmGray["100"],
+      fill: colors.warmGray["100"],
+    },
+    text: {
+      foreground: colors.warmGray["900"],
+      muted: colors.warmGray["700"],
+    },
+    primary: colors.amber,
+    neutral: colors.warmGray,
+  },
+};
+
+const pale: ColorScheme = {
+  id: "pale",
+  type: "dark",
+  colors: {
+    bg: {
+      base: colors.blueGray["800"],
+      fill: colors.blueGray["900"],
+    },
+    text: {
+      foreground: colors.blueGray["100"],
+      muted: colors.blueGray["300"],
+    },
+    primary: colors.violet,
+    neutral: colors.blueGray,
+  },
+};
+
 const theme = extendTheme({
   cursor: "pointer",
   colorSchemes: {
     light,
     cool,
+    bee,
+    pale,
   },
 });
 
 export default function Theme(props: { children: any }) {
   return (
-    <VechaiProvider theme={theme} colorScheme="light">
+    <VechaiProvider>
       {props.children}
     </VechaiProvider>
   );

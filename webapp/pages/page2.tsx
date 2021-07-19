@@ -31,12 +31,12 @@ export default function Page2() {
   }, [state.expenses]);
   return (
     <Theme>
-      <h1>Hey</h1>
+      <h1 className={`text-xl`}>Expenses</h1>
       <ExpenseForm
         onSubmit={onSubmit}
       >
       </ExpenseForm>
-      <h2>Items</h2>
+      <h1 className={`text-xl`}>Items</h1>
       <div>
         {state.expenses.map((e, i) => {
           return <div key={i}>
@@ -53,7 +53,7 @@ export default function Page2() {
           </div>;
         })}
       </div>
-      <h2>Totals</h2>
+      <h1 className={`text-xl`}>Totals</h1>
       <div>
         <pre>
           {JSON.stringify(computeCrop(crop), null, 2)}

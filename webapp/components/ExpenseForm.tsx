@@ -74,9 +74,9 @@ export default function ExpenseForm(props: { onSubmit: any }) {
             <option value="KRW">KRW</option>
           </Select>
         </StyledFormControl>
-        <StyledFormControl className={`py-2`}>
+        <StyledFormControl className={`py-2 `}>
           <Button variant="solid" color="primary" type="submit">
-            Button
+            Save
           </Button>
         </StyledFormControl>
       </div>
