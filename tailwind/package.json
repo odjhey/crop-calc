@@ -1,0 +1,12 @@
+{
+  "name": "tailwind",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Odee",
+  "license": "MIT",
+  "dependencies": {
+    "@tailwindcss/forms": "^0.3.3",
+    "@vechaiui/core": "^0.4.0",
+    "tailwindcss": "^2.2.4"
+  }
+}
