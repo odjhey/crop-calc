@@ -47,7 +47,7 @@ type Bayad = Readonly<{
   bayad: Curr;
   qty: Qty;
   transpo: Curr;
-  foodComboy: Curr;
+  comboy: Curr;
 }>;
 type Bayads = readonly Bayad[];
 
