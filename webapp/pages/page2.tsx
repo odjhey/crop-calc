@@ -1,120 +1,64 @@
 import React, { useEffect, useState } from "react";
 import { addExpense, computeCrop, createCrop, createExpense } from "xcrop";
+import ExpenseForm from "../components/ExpenseForm.tsx";
+import ExpenseRow from "../components/ExpenseRow.tsx";
+
+import { VechaiProvider } from "@vechaiui/react";
 
 export default function Page2() {
   const [state, setState] = useState({ expenses: [] });
-  const [input, setInput] = useState({
-    description: "",
-    qty: 0,
-    price: 0,
-    curr: "",
-  });
   const [crop, setCrop] = useState(createCrop({ expenses: [], bayads: [] }));
+  const onSubmit = (fields) => {
+    const expense = createExpense({
+      date: "20210101",
+      description: fields.description,
+      qty: fields.qty,
+      unitPrice: fields.price,
+      uom: "PC",
+      curr: fields.curr || "PHP",
+      totalPrice: 0,
+    });
+    setState((prev) => ({
+      ...state,
+      expenses: addExpense(expense, prev.expenses),
+    }));
+  };
   useEffect(() => {
     console.log("expenses changed");
     setCrop(() => {
       return createCrop({ expenses: state.expenses, bayads: [] });
     });
   }, [state.expenses]);
-  return (<div>
-    <h1>Hey</h1>
-    <table>
-      <thead>
-      <tr>
-        <th>Description</th>
-        <th>Qty</th>
-        <th>Unit Price</th>
-        <th>Currency</th>
-      </tr>
-</thead>
-<tbody>
-      <tr>
-        <td>
-          <input
-            id="desc"
-            type="text"
-            onChange={(e) => {
-              setInput(() => {
-                return { ...input, description: e.target.value };
-              });
-            }}
-          />
-        </td>
-        <td>
-          <input
-            type="number"
-            onChange={(e) => {
-              setInput(() => {
-                return { ...input, qty: e.target.value };
-              });
-            }}
-          />
-        </td>
-        <td>
-          <input
-            type="number"
-            onChange={(e) => {
-              setInput(() => {
-                return { ...input, price: e.target.value };
-              });
-            }}
-          />
-        </td>
-        <td>
-          <select
-            value={input.curr}
-            onChange={(e) => {
-              setInput(() => {
-                return { ...input, curr: e.target.value };
-              });
-            }}
-          >
-            <option value="PHP">PHP</option>
-            <option value="USD">USD</option>
-            <option value="JPY">JPY</option>
-            <option value="KRW">KRW</option>
-          </select>
-        </td>
-        <td>
-          <button
-            type="button"
-            onClick={() => {
-              const expense = createExpense({
-                date: "20210101",
-                description: input.description,
-                qty: input.qty,
-                unitPrice: input.price,
-                uom: "PC",
-                curr: input.curr || "PHP",
-                totalPrice: 0,
-              });
-              setState((prev) => ({
-                ...state,
-                expenses: addExpense(expense, prev.expenses),
-              }));
-            }}
-          >
-            go
-          </button>
-        </td>
-      </tr>
-</tbody>
-    </table>
-    <h2>Items</h2>
-    <div>
-      {state.expenses.map((e, i) => {
-        return <div key={i}>
-          <pre>
-            {JSON.stringify(e)}
-          </pre>
-        </div>;
-      })}
-    </div>
-    <h2>Totals</h2>
-    <div>
-      <pre>
-        {JSON.stringify(computeCrop(crop), null, 2)}
-      </pre>
-    </div>
-  </div>);
+  return (
+    <VechaiProvider>
+      <h1>Hey</h1>
+      <ExpenseForm
+        onSubmit={onSubmit}
+      >
+      </ExpenseForm>
+      <h2>Items</h2>
+      <div>
+        {state.expenses.map((e, i) => {
+          return <div key={i}>
+            <ExpenseRow
+              {...e}
+              date={`${e.date.yyyy} ${e.date.mm} ${e.date.dd}`}
+              qty={`${e.qty.value}`}
+              uom={`${e.qty.uom}`}
+              unitPrice={`${e.unitPrice.value}`}
+              curr={`${e.unitPrice.curr}`}
+              totalPrice={`${e.totalPrice.value}`}
+            >
+            </ExpenseRow>
+          </div>;
+        })}
+      </div>
+      <h2>Totals</h2>
+      <div>
+        <pre>
+          {JSON.stringify(computeCrop(crop), null, 2)}
+        </pre>
+      </div>
+    </VechaiProvider>
+  );
 }
