@@ -10,7 +10,8 @@
     "xcrop": "./vendor/bundle.js",
     "@vechaiui/core": "https://esm.sh/@vechaiui/core",
     "@vechaiui/react": "https://esm.sh/@vechaiui/react",
-    "react-hook-form": "https://esm.sh/react-hook-form?dev"
+    "react-hook-form": "https://esm.sh/react-hook-form?dev",
+    "react-table": "https://esm.sh/react-table"
   },
   "scopes": {}
 }

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { addExpense, computeCrop, createCrop, createExpense } from "xcrop";
 import ExpenseForm from "../components/ExpenseForm.tsx";
 import ExpenseRow from "../components/ExpenseRow.tsx";
+import GridTable from "../components/GridTable.tsx";
+import { expensesColumns } from "../components/ExpensesVO.ts";
 
 import Theme from "../components/Theme.tsx";
 
@@ -23,6 +25,12 @@ export default function Page2() {
       expenses: addExpense(expense, prev.expenses),
     }));
   };
+
+  const columns = React.useMemo(
+    () => expensesColumns,
+    [],
+  );
+
   useEffect(() => {
     console.log("expenses changed");
     setCrop(() => {
@@ -37,22 +45,21 @@ export default function Page2() {
       >
       </ExpenseForm>
       <h1 className={`text-xl`}>Items</h1>
-      <div>
-        {state.expenses.map((e, i) => {
-          return <div key={i}>
-            <ExpenseRow
-              {...e}
-              date={`${e.date.yyyy} ${e.date.mm} ${e.date.dd}`}
-              qty={`${e.qty.value}`}
-              uom={`${e.qty.uom}`}
-              unitPrice={`${e.unitPrice.value}`}
-              curr={`${e.unitPrice.curr}`}
-              totalPrice={`${e.totalPrice.value}`}
-            >
-            </ExpenseRow>
-          </div>;
+      {state.expenses.length <= 0 ? <p>So much empty.</p> : <GridTable
+        columns={columns}
+        data={state.expenses.map((e, i) => {
+          return {
+            date: `${e.date.yyyy} ${e.date.mm} ${e.date.dd}`,
+            description: `${e.description}`,
+            qty: `${e.qty.value}`,
+            uom: `${e.qty.uom}`,
+            unitPrice: `${e.unitPrice.value}`,
+            currency: `${e.unitPrice.curr}`,
+            totalPrice: `${e.totalPrice.value}`,
+          };
         })}
-      </div>
+      >
+      </GridTable>}
       <h1 className={`text-xl`}>Totals</h1>
       <div>
         <pre>
