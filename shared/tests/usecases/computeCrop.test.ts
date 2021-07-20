@@ -36,6 +36,9 @@ Deno.test("compute crop", () => {
   const crop = createCrop({ expenses: givenExpenses, bayads: givenBayads });
   const result = computeCrop(crop);
   // 26370.00
-  assertEquals(result.totalExpenses["PHP"].value, 26370);
-  assertEquals(result.totalBayads["PHP"].value, 467167);
+  assertEquals(
+    result.totalExpenses.find((c) => c.curr === "PHP")?.value,
+    26370
+  );
+  assertEquals(result.totalBayads.find((c) => c.curr === "PHP")?.value, 467167);
 });
