@@ -33,4 +33,39 @@ const expensesColumns = [
   },
 ];
 
-export { expensesColumns };
+const bayadsColumns = [
+  {
+    Header: "ID",
+    accessor: "id", // accessor is the "key" in the data
+  },
+  {
+    Header: "Date",
+    accessor: "date",
+  },
+  {
+    Header: "Bayad",
+    accessor: "bayad",
+  },
+  {
+    Header: "Quantity",
+    accessor: "qty",
+  },
+  {
+    Header: "Unit",
+    accessor: "uom",
+  },
+  {
+    Header: "Transpo",
+    accessor: "transpo",
+  },
+  {
+    Header: "Comboy",
+    accessor: "comboy",
+  },
+  {
+    Header: "Currency",
+    accessor: "currency",
+  },
+];
+
+export { bayadsColumns, expensesColumns };

@@ -9,13 +9,15 @@ function StyledFormControl(props: { className: any; children: any }) {
 }
 
 interface IFormInput {
-  description: string;
+  bayad: number;
   qty: number;
-  price: number;
+  uom: string;
+  transpo: number;
+  comboy: number;
   curr: string;
 }
 
-export default function ExpenseForm(props: { onSubmit: any }) {
+export default function BayadForm(props: { onSubmit: any }) {
   const { register, handleSubmit, formState: { errors } } = useForm<
     IFormInput
   >();
@@ -27,15 +29,15 @@ export default function ExpenseForm(props: { onSubmit: any }) {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="flex flex-wrap w-full">
-        <StyledFormControl className={`w-80`}>
-          <FormLabel htmlFor="description" id="description-label">
-            Expense Description
+        <StyledFormControl className={`w-40`}>
+          <FormLabel htmlFor="bayad" id="bayad-label">
+            Bayad
           </FormLabel>
           <Input
-            invalid={errors.description && "true"}
-            id="description"
-            type="text"
-            {...register("description", { required: true, maxLength: 20 })}
+            invalid={errors.bayad && "true"}
+            id="bayad"
+            type="number"
+            {...register("bayad", { required: true, min: 0 })}
           />
         </StyledFormControl>
         <StyledFormControl className={`w-40`}>
@@ -49,23 +51,48 @@ export default function ExpenseForm(props: { onSubmit: any }) {
             {...register("qty", { required: true, min: 0, max: 9999 })}
           />
         </StyledFormControl>
-        <StyledFormControl className={`w-40`}>
-          <FormLabel htmlFor="unit-price" id="unit-price-label">
-            Unit Price
+        <StyledFormControl className={`w-20`}>
+          <FormLabel htmlFor="uom" id="uom-label">
+            UoM
           </FormLabel>
           <Input
-            invalid={errors.price && "true"}
-            id="unit-price"
-            type="number"
-            {...register("price", { required: true, min: 0, max: 99999 })}
+            invalid={errors.uom && "true"}
+            id="uom"
+            type="text"
+            {...register("uom", { required: true, maxLength: 5 })}
           />
         </StyledFormControl>
+
         <StyledFormControl className={`w-40`}>
-          <FormLabel htmlFor="currency" id="currency-label">
+          <FormLabel htmlFor="transpo" id="transpo-label">
+            Transpo
+          </FormLabel>
+          <Input
+            invalid={errors.transpo && "true"}
+            id="transpo"
+            type="number"
+            {...register("transpo", { required: true, min: 0 })}
+          />
+        </StyledFormControl>
+
+        <StyledFormControl className={`w-40`}>
+          <FormLabel htmlFor="comboy" id="comboy-label">
+            Comboy
+          </FormLabel>
+          <Input
+            invalid={errors.comboy && "true"}
+            id="comboy"
+            type="number"
+            {...register("comboy", { required: true, min: 0 })}
+          />
+        </StyledFormControl>
+
+        <StyledFormControl className={`w-40`}>
+          <FormLabel htmlFor="curr" id="curr-label">
             Currency
           </FormLabel>
           <Select
-            id="currency"
+            id="curr"
             {...register("curr", { required: true })}
           >
             <option value="PHP">PHP</option>

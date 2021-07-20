@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { useSortBy, useTable } from "react-table";
 
 function GridTable(props) {
-  const { columns, data } = props;
+  const { columns, data, columnsMeta } = props;
 
   const {
     getTableProps,
@@ -36,7 +36,7 @@ function GridTable(props) {
           return (
             <tr {...row.getRowProps()}>
               {row.cells.map((cell) => {
-                const isRight = ["qty", "unitPrice", "totalPrice"].includes(
+                const isRight = columnsMeta.numbers.includes(
                   cell.column.id,
                 );
                 return (
